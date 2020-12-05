@@ -1,5 +1,5 @@
 ///***********************************************************************************************************************************************/
-///******************************** PROJECT : End of Train Telemetry System(EoTT)        *********************************************************/
+///********************************                                                       *********************************************************/
 ///*******************************  ABSTRACT: Chip on glass Liquid Crystal Display Module(NHD-C24064WO-ATFH#-3V3 ) *******************************/
 ///*******************************  FILE    : EOTT_LCD.c                                                           *******************************/
 ///***********************************************************************************************************************************************/
@@ -122,11 +122,11 @@ void Write_SlaveData(uint8_t i)
  ****************************************************************************************************************************************************/
 void LCD_Init(void)
 {
-    LCD_RD_PS(LOW);                                   /* P/S = ìHî: Parallel data input.P/S = ìLî: Serial data input.       */
-    LCD_C86(LOW);                                     /* C86 = ìHî: 6800 Series MPU interface.C86 = ìLî: 8080 MPU interface.*/
-    LCD_RST_BAR(LOW);                                 /* When reset is set to ìL,î the settings are initialized             */
+    LCD_RD_PS(LOW);                                   /* P/S = ‚ÄúH‚Äù: Parallel data input.P/S = ‚ÄúL‚Äù: Serial data input.       */
+    LCD_C86(LOW);                                     /* C86 = ‚ÄúH‚Äù: 6800 Series MPU interface.C86 = ‚ÄúL‚Äù: 8080 MPU interface.*/
+    LCD_RST_BAR(LOW);                                 /* When reset is set to ‚ÄúL,‚Äù the settings are initialized             */
     Delay_uSec(2000);                                 /* Delay 2msec            */
-    LCD_RST_BAR(HIGH);                                /*  reset is set to ìH,î              */
+    LCD_RST_BAR(HIGH);                                /*  reset is set to ‚ÄúH,‚Äù              */
     Delay_uSec(20000);                                /* Delay 20msec            */
     /*  Send Display wake up command for the Master processor */
     Write_MasterComand(LCD_BIAS_SET);                 /* 1/9 bias  LCD_BIAS_SET*/
@@ -153,7 +153,7 @@ void LCD_Init(void)
 }
 /*****************************************************************************************************************************************************
  ** Function name   : ClearDisplay
- ** Descriptions    : Function clears the whole display
+ ** Descriptions    : Function clears the whole display pixels
  ** parameters      : None
  ** Returned value  : None
  ****************************************************************************************************************************************************/
@@ -183,7 +183,7 @@ void ClearDisplay(void)
     }
 }
 /*****************************************************************************************************************************************************
- ** Function name   : DispLaydat_master
+ ** Function name   : DispLaydat_slave,mster having a 64 coloumns and 108 rows of pixels
  ** Descriptions    : Function writes the data into the Master Display
  ** parameters      : Data wants to write
  ** Returned value  : None
@@ -217,7 +217,12 @@ void Displaydat_Slave(uint8_t pageaddr,uint8_t clmnaddr,uint8_t pagesize,uint8_t
     Write_SlaveComand(0xAF);                                    /*  slave Display ON */
 
 }
-
+/*****************************************************************************************************************************************************
+ ** Function name   : DispLaydat_slave,mster having a 64 coloumns and 132 rows of pixels
+ ** Descriptions    : Function writes the data into the Master Display
+ ** parameters      : Data wants to write
+ ** Returned value  : None
+ ****************************************************************************************************************************************************/
 void Displaydata_Master(uint8_t pageaddr,uint8_t clmnaddr,uint8_t pagesize,uint8_t colomnsize,uint8_t *lcdstrng)
 {
 
